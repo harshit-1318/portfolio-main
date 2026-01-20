@@ -32,13 +32,13 @@ connectDB();
 const allowedOrigins = [
   "http://localhost:5173",
   "http://127.0.0.1:5173",
-  process.env.FRONTEND_URL, // Vercel URL
+  "https://portfolio-main-delta-black.vercel.app", // ✅ Frontend (Vercel)
 ];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow Postman / server-to-server
+      // Allow Postman / server-to-server requests
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
@@ -46,7 +46,7 @@ app.use(
       }
 
       console.log("❌ Blocked by CORS:", origin);
-      return callback(null, false);
+      return callback(new Error("CORS not allowed"));
     },
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
