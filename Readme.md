@@ -5,18 +5,23 @@ This project is a dynamic, full-stack portfolio designed to highlight my work as
 ✨ Features
 
 Full-Stack Architecture:
+
 Separated frontend (React) and backend (Node.js / Express) for a modular and scalable application.
 
 Dynamic Content:
+
 Project details and related information are stored in MongoDB, allowing easy updates without code changes.
 
 RESTful API:
+
 A well-structured API serves data from the database to the React frontend.
 
 Responsive Design:
+
 Clean, modern UI that adapts seamlessly to different screen sizes.
 
 Contact Form:
+
 Form submissions are handled by the backend and securely saved to the database.
 
 Project Structure
@@ -24,13 +29,17 @@ Project Structure
 The project is divided into two main directories:
 
 Server:
+
 Contains server-side code including API routes, controllers, models, and configuration files.
 
 Client:
+
 Contains client-side code built with React.js, including components, pages, and routing logic.
 
 🚀 Tech Stack
+
 Frontend
+
 
 React – JavaScript library for building user interfaces
 
@@ -51,6 +60,7 @@ Mongoose – MongoDB object modeling tool
 CORS – Middleware to enable cross-origin resource sharing
 
 🛠️ Installation Guide
+
 Prerequisites
 
 Ensure you have the following installed:
@@ -60,6 +70,7 @@ Node.js (latest stable version)
 npm or yarn
 
 To set up the project locally, follow these steps:
+
 1. Clone the Repository
 git clone https://github.com/harshit-1318/portfolio-main.git
 
