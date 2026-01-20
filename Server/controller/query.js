@@ -18,7 +18,7 @@ module.exports.query = async (req, res) => {
       });
     }
 
-    if (typeof message !== "string" || message.trim().length < 10) {
+    if (message.trim().length < 10) {
       return res.status(400).json({
         success: false,
         message: "Message must be at least 10 characters long.",
@@ -26,7 +26,7 @@ module.exports.query = async (req, res) => {
     }
 
     // ================= SAVE TO DB =================
-    const savedQuery = await Query.create({
+    await Query.create({
       name: name.trim(),
       email: email.trim().toLowerCase(),
       country: countryCode.trim(),
@@ -40,7 +40,7 @@ module.exports.query = async (req, res) => {
       message: "Your message has been sent successfully.",
     });
 
-    // ================= EMAIL (BACKGROUND TASK) =================
+    // ================= EMAIL (BACKGROUND) =================
     setImmediate(async () => {
       try {
         if (!process.env.SENDER_MAIL) {
@@ -51,7 +51,7 @@ module.exports.query = async (req, res) => {
         const transporter = createTransporter();
         const timestamp = new Date().toUTCString();
 
-        // Owner notification
+        // Owner email
         await transporter.sendMail({
           from: `"Harshit Kumar" <${process.env.SENDER_MAIL}>`,
           to: process.env.SENDER_MAIL,
@@ -66,7 +66,7 @@ module.exports.query = async (req, res) => {
           }),
         });
 
-        // Auto reply to sender
+        // Auto reply
         await transporter.sendMail({
           from: `"Harshit Kumar" <${process.env.SENDER_MAIL}>`,
           to: email,
@@ -74,15 +74,13 @@ module.exports.query = async (req, res) => {
           html: renderTemplate(SENDER_EMAIL_TEMPLATE, { name }),
         });
 
-        console.log("✅ Emails sent successfully");
+        console.log("✅ Emails sent successfully (Brevo)");
       } catch (err) {
         console.error("❌ Email sending failed:", err.message);
       }
     });
   } catch (error) {
     console.error("❌ Query controller error:", error);
-
-    // Fail-safe response
     return res.status(500).json({
       success: false,
       message: "Something went wrong. Please try again later.",
