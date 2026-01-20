@@ -113,17 +113,19 @@ function Home({ id }) {
           </a>
 
           <a
-            href="/HARSHIT_RESUME.pdf"
-            download
-            onClick={handleResumeDownload}
-            className="px-9 py-4 rounded-full font-semibold
-            text-[#286f6b] outline outline-1 outline-[#286f6b]
-            transition-all duration-300 hover:bg-[#286f6b] hover:text-white hover:scale-105 hover:shadow-xl
-            flex items-center gap-3"
-          >
-            Download Resume
-            <i className="fa-solid fa-download"></i>
-          </a>
+  href="/HARSHIT_RESUME%20(1).pdf"
+  download="Harshit_Kumar_Resume.pdf"
+  onClick={handleResumeDownload}
+  className="px-9 py-4 rounded-full font-semibold
+  text-[#286f6b] outline outline-1 outline-[#286f6b]
+  transition-all duration-300 hover:bg-[#286f6b] hover:text-white hover:scale-105 hover:shadow-xl
+  flex items-center gap-3"
+>
+  Download Resume
+  <i className="fa-solid fa-download"></i>
+</a>
+
+
         </div>
       </div>
 
