@@ -1,5 +1,5 @@
 const createTransporter = require("../Config/nodemailer");
-const Query = require("../model/Query");
+const Query = require("../model/query");
 const {
   SENDER_EMAIL_TEMPLATE,
   OWNER_EMAIL_TEMPLATE,
