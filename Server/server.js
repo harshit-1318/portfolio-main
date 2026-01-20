@@ -1,5 +1,5 @@
 // ======================
-// LOAD ENV
+// LOAD ENV (Local only)
 // ======================
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
@@ -27,26 +27,26 @@ const PORT = process.env.PORT || 3000;
 connectDB();
 
 // ======================
-// CORS CONFIG (🔥 ONLY ONCE)
+// CORS CONFIG (PRODUCTION SAFE)
 // ======================
 const allowedOrigins = [
   "http://localhost:5173",
   "http://127.0.0.1:5173",
-  "http://192.168.198.1:5173", // LAN testing
-  process.env.FRONTEND_URL,   // Vercel (future)
+  process.env.FRONTEND_URL, // Vercel URL
 ];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // allow server-to-server / Postman
+      // Allow Postman / server-to-server
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
 
-      return callback(new Error("CORS: Origin not allowed"));
+      console.log("❌ Blocked by CORS:", origin);
+      return callback(null, false);
     },
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
@@ -55,7 +55,7 @@ app.use(
 );
 
 // ======================
-// MIDDLEWARES
+// GLOBAL MIDDLEWARES
 // ======================
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true }));
