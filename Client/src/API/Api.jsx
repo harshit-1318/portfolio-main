@@ -12,3 +12,4 @@ export const submitQuery = async (data) => {
   const res = await api.post("/query", data);
   return res.data;
 };
+
